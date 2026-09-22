@@ -7,7 +7,7 @@
   <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License" />
 </p>
 
-Ультралегковесный headless-клиент для **YouTube Music**, написанный на Rust. Продолжает серию *zero-клиентов* за [ymz](https://github.com/BBQQYT/ymz). Играет бесконечный персональный поток **«Мой джем»** (RDMM), не тащит за собой Electron/Chromium, нативно интегрируется в окружение через **MPRIS v2** и управляется стандартными системными средствами (`playerctl`, Waybar, шторка Dank Linux, виджеты панелей, медиаклавиши).
+Ультралегковесный headless-клиент для **YouTube Music**, написанный на Rust. Играет бесконечный персональный поток **«Мой джем»** (RDMM), не тащит за собой Electron/Chromium, нативно интегрируется в окружение через **MPRIS v2** и управляется стандартными системными средствами (`playerctl`, Waybar, шторка Dank Linux, виджеты панелей, медиаклавиши).
 
 ---
 
