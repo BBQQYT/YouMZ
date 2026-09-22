@@ -1,0 +1,16 @@
+/target
+*.log
+*.tmp
+*.bak
+.DS_Store
+
+# Local secrets and configs
+cookie
+cookies.txt
+token.json
+client_id
+client_secret
+proxy
+playlist
+base_url
+*.cookie

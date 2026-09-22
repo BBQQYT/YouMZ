@@ -1,0 +1,25 @@
+# Демон youmz: YouTube Music как сервис (MPRIS v2 + org.youmz.Control).
+# Управление: systemctl --user {start,stop,restart,status} youmz.service
+[Unit]
+Description=YouTube Music Zero (daemon)
+# D-Bus-имя считается признаком готовности — юнит "started" только когда
+# демон зарегистрировал org.mpris.MediaPlayer2.youmz
+After=network-online.target pipewire.service wireplumber.service graphical-session.target
+Wants=network-online.target
+
+[Service]
+Type=dbus
+BusName=org.mpris.MediaPlayer2.youmz
+ExecStart=%h/.local/bin/youmz
+Environment=RUST_LOG=info
+# on-failure: чистый выход через systemctl stop остаётся остановленным
+Restart=on-failure
+RestartSec=3
+# Быстрое и предсказуемое завершение: демон сам гасит звук и отпускает имя
+TimeoutStopSec=15
+# Демон не пишет в терминал — логи смотрим через journalctl --user -u youmz
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=graphical-session.target

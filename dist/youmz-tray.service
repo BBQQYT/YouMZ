@@ -1,0 +1,20 @@
+# Иконка youmz в системном трее (мини-меню выбора плейлиста).
+# Жёстко привязана к демону: стартует после него и останавливается вместе с ним.
+[Unit]
+Description=YouTube Music Zero (tray)
+Requires=youmz.service
+After=youmz.service
+# Остановка youmz.service по цепочке останавливает и трей
+PartOf=youmz.service
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/youmz-tray
+Environment=RUST_LOG=info
+Restart=on-failure
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=graphical-session.target
