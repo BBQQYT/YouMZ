@@ -5,9 +5,6 @@
   <a href="README_RU.md"><img src="https://img.shields.io/badge/Язык-Русский-blue?style=for-the-badge" alt="Русский" /></a>
 </p>
 
-<p align="center">
-  <a href="README.md">English</a> | <b>Русский</b>
-</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-Rust-dea584?style=for-the-badge&logo=rust" alt="Rust" />
