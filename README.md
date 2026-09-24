@@ -1,43 +1,52 @@
 # youmz (YouTube Music Zero)
 
 <p align="center">
+  <a href="README.md"><img src="https://img.shields.io/badge/Language-English-blue?style=for-the-badge" alt="English" /></a>
+  <a href="README_RU.md"><img src="https://img.shields.io/badge/Язык-Русский-lightgrey?style=for-the-badge" alt="Русская версия" /></a>
+</p>
+
+<p align="center">
+  <b>English</b> | <a href="README_RU.md">Русский</a>
+</p>
+
+<p align="center">
   <img src="https://img.shields.io/badge/Language-Rust-dea584?style=for-the-badge&logo=rust" alt="Rust" />
   <img src="https://img.shields.io/badge/Platform-Linux-1793d1?style=for-the-badge&logo=linux" alt="Linux" />
   <img src="https://img.shields.io/badge/Memory-~25MB_RSS-brightgreen?style=for-the-badge" alt="RAM" />
   <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="License" />
 </p>
 
-Ультралегковесный headless-клиент для **YouTube Music**, написанный на Rust. Играет бесконечный персональный поток **«Мой джем»** (RDMM), не тащит за собой Electron/Chromium, нативно интегрируется в окружение через **MPRIS v2** и управляется стандартными системными средствами (`playerctl`, Waybar, виджеты панелей, медиаклавиши).
+An ultra-lightweight headless **YouTube Music** client written in Rust. Plays your continuous personalized **“My Supermix”** (RDMM) stream, carries zero Electron/Chromium bloat, natively integrates into the desktop environment via **MPRIS v2**, and is controlled using standard system utilities (`playerctl`, Waybar, panel widgets, media hotkeys).
 
-Да, написан ИИ, я этого не скрываю!
+Yes, it was written with AI, I don't hide it!
 
-Есть так же аналог но для Yandex Music, [YMZ!](https://github.com/BBQQYT/YMZ)
-
----
-
-### Особенности
-
-* **Zero-bloat:** потребление памяти в пределах **20–25 МБ RSS** (против ~700 МБ у браузера или десктопных сборок).
-* **Полноценный MPRIS v2:**
-  * Название, артист и обложка трека в реальном времени.
-  * Локальное кэширование обложек в высоком разрешении (`~/.cache/youmz/covers/`, `file://` URI) для мгновенного отображения в шторках окружений, виджетах и на экранах блокировки.
-  * Синхронизация времени: отображение длительности (`mpris:length`) и шкалы воспроизведения (`Position`).
-  * Полная поддержка перемотки по клику на ползунок (`Seek`, `SetPosition`).
-* **Мгновенные скипы (Gapless Preload):** следующий трек и его обложка предзагружаются в память и кэш в фоне, пока играет текущий трек.
-* **Фильтрация рекламы:** рекламные слоты, промо-вставки и недоступные треки автоматически отсекаются до воспроизведения.
-* **Защита от зацикливания:** история проигранных треков фильтрует повторы внутри присылаемых партий.
-* **Поддержка прокси:** полная работа через SOCKS5/HTTP-прокси (`socks5h://...`) для обхода сетевых ограничений и блокировок YouTube.
-* **Безопасность:** изолированное хранение сессии в `~/.config/youmz/cookie` с правами доступа `600`.
-* **Сетевая устойчивость:** автоматический retry с экспоненциальной задержкой при сбоях сети или проверках на бота.
-* **Универсальность:** работает с PipeWire, PulseAudio и чистой ALSA на любых дистрибутивах Linux.
-* **Иконка в трее (опционально):** `youmz-tray` с меню выбора плейлистов аккаунта и сменой очереди на лету через D-Bus (`org.youmz.Control`).
-* **Графический вход (опционально):** `youmz-login` открывает WebKit-окно YouTube Music для автоматического сохранения cookie-сессии.
+There is also a similar client for Yandex Music: [YMZ!](https://github.com/BBQQYT/YMZ)
 
 ---
 
-### Системные зависимости
+### Features
 
-Для сборки требуются заголовочные файлы ALSA и `pkg-config`. Для надежного воспроизведения аудиопотоков YouTube используется `yt-dlp`:
+* **Zero-bloat:** memory footprint stays strictly within **20–25 MB RSS** (compared to ~700 MB for browser tabs or desktop Electron apps).
+* **Full MPRIS v2 Support:**
+  * Real-time track title, artist, and cover art.
+  * Local high-resolution artwork caching (`~/.cache/youmz/covers/`, `file://` URI) for instant rendering in notification centers, widgets, and lockscreens.
+  * Time synchronization: track length (`mpris:length`) and playback progress (`Position`).
+  * Seeking support via slider clicks (`Seek`, `SetPosition`).
+* **Instant Skips (Gapless Preload):** the upcoming track and its album art are prefetched into memory and disk cache in the background while the current track plays.
+* **Ad & Unavailable Track Filtering:** advertising segments, promos, and unplayable tracks are automatically discarded prior to playback.
+* **Loop Protection:** played track history filters out repetitions within received radio batches.
+* **Proxy Support:** full support for SOCKS5/HTTP proxies (`socks5h://...`) to circumvent network restrictions and YouTube blocks.
+* **Security:** isolated session storage at `~/.config/youmz/cookie` with `600` file permissions.
+* **Network Resilience:** automatic retry with exponential backoff on network failures or bot checks.
+* **Versatility:** works seamlessly with PipeWire, PulseAudio, and bare ALSA across any Linux distribution.
+* **System Tray Icon (optional):** `youmz-tray` featuring account playlist selection and on-the-fly queue switching via D-Bus (`org.youmz.Control`).
+* **Graphical Login (optional):** `youmz-login` opens a lightweight WebKit window for YouTube Music to automatically capture and save cookie sessions.
+
+---
+
+### System Dependencies
+
+Building requires ALSA development headers and `pkg-config`. For reliable YouTube audio extraction and streaming, `yt-dlp` is used:
 
 * **Arch Linux / Manjaro / CachyOS:**
   ```bash
@@ -66,63 +75,63 @@
 
 ---
 
-### Сборка и установка
+### Build & Installation
 
-1. **Клонирование репозитория:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/BBQQYT/youmz.git
    cd youmz
    ```
 
-2. **Компиляция релизного бинарника:**
+2. **Compile the release binary:**
    ```bash
-   # Базовая сборка демона:
+   # Base daemon build:
    cargo build --release
 
-   # Либо со встроенным треем и графическим входом:
+   # Or with built-in tray and graphical login:
    cargo build --release --features "gui-login,tray"
    ```
 
-3. **(Опционально) Установка в систему:**
+3. **(Optional) Install to system:**
    ```bash
    sudo install -Dm755 target/release/youmz /usr/local/bin/youmz
-   # Если собирались дополнительные компоненты:
+   # If optional components were built:
    sudo install -Dm755 target/release/youmz-login /usr/local/bin/youmz-login
    sudo install -Dm755 target/release/youmz-tray /usr/local/bin/youmz-tray
    ```
 
 ---
 
-### Настройка
+### Configuration
 
-1. **Авторизация (Cookie):**
-   Сохраните cookie авторизованной сессии YouTube Music в файл с правами `600`:
+1. **Authentication (Cookie):**
+   Save your authenticated YouTube Music session cookie into a file with `600` permissions:
    ```bash
    mkdir -p ~/.config/youmz
-   echo "ВАШ_COOKIE" > ~/.config/youmz/cookie
+   echo "YOUR_COOKIE" > ~/.config/youmz/cookie
    chmod 600 ~/.config/youmz/cookie
    ```
-   > Либо воспользуйтесь командой `youmz login` для графического входа через браузерное окно.
+   > Alternatively, run `youmz login` for interactive login through a webview window.
 
-2. **Прокси (при необходимости):**
-   Если доступ к YouTube ограничен, укажите адрес прокси (рекомендуется протокол `socks5h` с удалённым DNS):
+2. **Proxy (optional):**
+   If YouTube access is restricted, provide a proxy address (a `socks5h` protocol with remote DNS resolution is recommended):
    ```bash
    echo "socks5h://localhost:2080" > ~/.config/youmz/proxy
    ```
 
-3. **Выбор потока / плейлиста:**
-   По умолчанию воспроизводится личный супермикс **«Мой джем»** (`RDMM`). При желании можно указать другой идентификатор:
+3. **Stream / Playlist Selection:**
+   By default, your personal supermix **"My Supermix"** (`RDMM`) is played. You can optionally specify another playlist or radio ID:
    ```bash
    echo "RDMM" > ~/.config/youmz/playlist
    ```
 
 ---
 
-### Автозапуск
+### Autostart
 
-#### Вариант 1: systemd user service (рекомендуется)
+#### Option 1: systemd user service (recommended)
 
-Создайте файл `~/.config/systemd/user/youmz.service`:
+Create `~/.config/systemd/user/youmz.service`:
 
 ```ini
 [Unit]
@@ -141,16 +150,16 @@ RestartSec=3
 WantedBy=default.target
 ```
 
-Активация и запуск:
+Enable and start the service:
 
 ```bash
 systemctl --user daemon-reload
 systemctl --user enable --now youmz.service
 ```
 
-#### Вариант 2: Запуск без systemd (Hyprland / Sway / AwesomeWM / i3)
+#### Option 2: Running without systemd (Hyprland / Sway / AwesomeWM / i3)
 
-Добавьте запуск в автозагрузку вашего оконного менеджера или композитора:
+Add `youmz` to your window manager or compositor startup config:
 
 * **Hyprland** (`hyprland.conf`):
   ```ini
@@ -169,27 +178,27 @@ systemctl --user enable --now youmz.service
 
 ---
 
-### Управление
+### Controls
 
 ```bash
-# Плей / Пауза
+# Play / Pause
 playerctl -p youmz play-pause
 
-# Следующий трек (скачок по «Мой джем»)
+# Next track (skip in My Supermix)
 playerctl -p youmz next
 
-# Перемотка вперед/назад на 10 секунд
+# Seek forward/backward by 10 seconds
 playerctl -p youmz position 10+
 playerctl -p youmz position 10-
 
-# Перейти на конкретную секунду (например, 1:15)
+# Jump to a specific second (e.g. 1:15)
 playerctl -p youmz position 75
 
-# Текущие метаданные и статус
+# Display current metadata and playback status
 playerctl -p youmz metadata
 ```
 
-#### Интеграция с Waybar (`config.jsonc`):
+#### Waybar Integration (`config.jsonc`):
 
 ```jsonc
 "mpris": {
@@ -205,6 +214,6 @@ playerctl -p youmz metadata
 
 ---
 
-### Лицензия
+### License
 
-Проект распространяется под лицензией [MIT](LICENSE).
+This project is licensed under the [MIT](LICENSE) License.
