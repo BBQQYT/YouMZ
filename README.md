@@ -6,10 +6,6 @@
 </p>
 
 <p align="center">
-  <b>English</b> | <a href="README_RU.md">Русский</a>
-</p>
-
-<p align="center">
   <img src="https://img.shields.io/badge/Language-Rust-dea584?style=for-the-badge&logo=rust" alt="Rust" />
   <img src="https://img.shields.io/badge/Platform-Linux-1793d1?style=for-the-badge&logo=linux" alt="Linux" />
   <img src="https://img.shields.io/badge/Memory-~25MB_RSS-brightgreen?style=for-the-badge" alt="RAM" />
